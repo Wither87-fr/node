@@ -1,0 +1,21 @@
+<h1>{{> letterList}}</h1>
+{{#if vips}}
+    <!-- {{#each vips}}
+        <div class="horizontal">
+            <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="Photo de {{this.VIP_PRENOM}} {{this.VIP_NOM}}" />
+            <br />
+            <a href="/repertoire/{{this.firstLett}}/{{this.VIP_NUM}}">{{this.VIP_PRENOM}} {{this.VIP_NOM}}</a>
+        </div>
+
+    {{/each}} -->
+    <div style="display : flex; flex-wrap : wrap; justify-content : space-around;">
+        {{#each vips}}
+            <div style="display : flex; flex-direction : column; margin-top : 50px;">
+                <img width="150px" height="200px" style="object-fit: cover;" src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="Photo de {{this.VIP_PRENOM}} {{this.VIP_NOM}}" />
+                <a href="/repertoire/{{this.firstLett}}/{{this.VIP_NUM}}">{{this.VIP_PRENOM}} {{this.VIP_NOM}}</a>
+            </div>
+        {{/each}}
+    </div>
+{{/if}}
+
+
