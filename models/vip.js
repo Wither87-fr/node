@@ -36,8 +36,8 @@ module.exports.findVipByLetter = function (callback, letter) {
 module.exports.getVipInfo = function(callback, vipNum) {
     db.getConnection( function (err, connexion) {
         if(!err) {
-            let sql = `SELECT VIP_NOM, VIP_PRENOM, na.NATIONALITE_NOM AS Nationnalite, VIP_TEXTE FROM vip v JOIN 
-                nationnalite na ON v.NATIONALITE_NUMERO = na.NATIONALITE_NUMERO WHERE VIP_NUMERO = ${vipNum}`; //TODO add job
+            let sql = `SELECT VIP_NOM, VIP_PRENOM, na.NATIONALITE_NOM AS Nationalite, VIP_TEXTE, DATE_FORMAT(VIP_NAISSANCE,"%a %e %M %Y") AS date_naissance FROM vip v JOIN 
+                nationalite na ON v.NATIONALITE_NUMERO = na.NATIONALITE_NUMERO WHERE VIP_NUMERO = ${vipNum}`; //TODO add job
             connexion.query(sql, callback);
             connexion.release;
         }
