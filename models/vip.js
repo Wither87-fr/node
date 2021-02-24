@@ -36,10 +36,30 @@ module.exports.findVipByLetter = function (callback, letter) {
 module.exports.getVipInfo = function(callback, vipNum) {
     db.getConnection( function (err, connexion) {
         if(!err) {
-            let sql = `SELECT VIP_NOM, VIP_PRENOM, na.NATIONALITE_NOM AS Nationalite, VIP_TEXTE, DATE_FORMAT(VIP_NAISSANCE,"%a %e %M %Y") AS date_naissance FROM vip v JOIN 
-                nationalite na ON v.NATIONALITE_NUMERO = na.NATIONALITE_NUMERO WHERE VIP_NUMERO = ${vipNum}`; //TODO add job
+            let sql = `SELECT VIP_NOM, VIP_PRENOM, na.NATIONALITE_NOM AS Nationalite, VIP_TEXTE, VIP_NAISSANCE AS date_naissance, p.PHOTO_ADRESSE FROM vip v JOIN 
+                nationalite na ON v.NATIONALITE_NUMERO = na.NATIONALITE_NUMERO JOIN photo p ON p.VIP_NUMERO = v.VIP_NUMERO WHERE v.VIP_NUMERO = ${vipNum} AND p.PHOTO_NUMERO = 1`; //TODO add job
             connexion.query(sql, callback);
             connexion.release;
         }
+    });
+}
+
+module.exports.getVipJob = function(callback, vipNum) {
+    db.getConnection( function (err, connexion) {
+       if(!err) {
+           let sql = `SELECT VIP_NUMERO, pro_nom, pro_action, pro_principal FROM (
+                        SELECT VIP_NUMERO, "Acteur" AS pro_nom, "film" AS pro_action, "test" AS pro_principal FROM acteur WHERE VIP_NUMERO = ${vipNum}
+                        UNION
+                        SELECT VIP_NUMERO, "Couturier" AS pro_nom, "réalisation" AS pro_action, "test" AS pro_principal FROM couturier WHERE VIP_NUMERO = ${vipNum}
+                        UNION
+                        SELECT VIP_NUMERO, "Realisateur" AS pro_nom, "film" AS pro_action, "test" AS pro_principal FROM realisateur WHERE VIP_NUMERO = ${vipNum}
+                        UNION
+                        SELECT VIP_NUMERO, "Chanteur" AS pro_nom, "album" AS pro_action, "test" AS pro_principal FROM chanteur WHERE VIP_NUMERO = ${vipNum}
+                        UNION
+                        SELECT VIP_NUMERO, "Mannequin" AS pro_nom, "défilé" AS pro_action, "test" AS pro_principal FROM mannequin WHERE VIP_NUMERO = ${vipNum}
+                       )t`
+           connexion.query(sql, callback)
+           connexion.release
+       }
     });
 }

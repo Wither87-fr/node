@@ -9,5 +9,37 @@
         {{/each}}
     </div>
 {{/if}}
+{{#if vipInfos}}
+    <div class="float">
+        <img src="/images/vip/{{vipInfos.PHOTO_ADRESSE}}" alt="Photo de {{vipInfos.VIP_PRENOM}} {{vipInfos.VIP_NOM}}" class="float"/>
+        <div class="float">
+            <p><b>Nom : </b> {{vipInfos.VIP_PRENOM}} {{vipInfos.VIP_NOM}}</p>
+            <p><b>Date de naissance : </b>{{vipInfos.date_naissance}}</p>
+            <p><b>Nationalité : </b>{{vipInfos.Nationalite}}</p>
+            {{#if professions}}
+                {{#each professions}}
+                    <p><b>Profession : </b>{{this.pro_nom}}</p>
+                    <p><b>Principal(aux) {{this.pro_action}}(s) : </b>{{this.pro_principal}}</p>
+                {{/each}}
+            {{/if}}
+            {{#if mariages}}
+                {{#each mariages}}
+                    <!-- TODO : mariage -->
+                {{/each}}
+            {{/if}}
+            {{#if liaisons}}
+                {{#each liaisons}}
+                    <!-- TODO : liaisons -->
+                {{/each}}
+            {{/if}}
+            <p><b>Qui suis-je ? : </b>{{vipInfos.VIP_TEXTE}}</p>
+            {{#if images}}
+                {{#each images}}
+                    <!-- TODO : images -->
+                {{/each}}
+            {{/if}}
+        </div>
+    </div>
+{{/if}}
 
 

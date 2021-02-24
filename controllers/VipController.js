@@ -42,7 +42,7 @@ module.exports.Search = function (request, response) {
 }
 module.exports.Show = function (request, response) {
     response.title = 'Répertoire des stars';
-    let name = request.params.name;
+    let num = request.params.num;
     async.parallel( [
             function (callback) {
                 model.getFirstLetters(function (err, result) {
@@ -52,8 +52,14 @@ module.exports.Show = function (request, response) {
             function (callback) {
                 model.getVipInfo(function (errE, resE) {
                     callback(null,resE);
-                }, name);
+                }, num);
             },
+            function(callback) {
+                model.getVipJob(function (errA, resA) {
+                    callback(null, resA)
+                }, num);
+            },
+
         ],
         function (err, result) {
             if (err) {
@@ -61,7 +67,8 @@ module.exports.Show = function (request, response) {
                 return;
             }
             response.firstVipLet = result[0];
-            response.vipInfos = result[1];
+            response.vipInfos = result[1][0];
+            response.professions = result[2];
             response.render('repertoireVips', response);
         })
 }

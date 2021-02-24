@@ -81,3 +81,7 @@ a  {
 .traitVertical {
   border-left: 1px white solid;
 }
+.float {
+    display: inline-block;
+    float: left;
+}
