@@ -4,3 +4,5 @@
 package-lock.json
 # Ignorer tous le repertoire node_modules
 node_modules/*
+#Ignorer les config spécifique par personne
+.idea/
