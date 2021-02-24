@@ -6,4 +6,5 @@ package-lock.json
 node_modules/*
 #Ignorer les config spécifique par personne
 .idea/
-# Ignorer la config de DBconfigDb.js
+# Ignorer la config de DB
+configDb.js
