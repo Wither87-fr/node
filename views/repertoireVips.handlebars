@@ -14,12 +14,22 @@
         <img src="/images/vip/{{vipInfos.PHOTO_ADRESSE}}" alt="Photo de {{vipInfos.VIP_PRENOM}} {{vipInfos.VIP_NOM}}" class="float"/>
         <div class="float">
             <p><b>Nom : </b> {{vipInfos.VIP_PRENOM}} {{vipInfos.VIP_NOM}}</p>
-            <p><b>Date de naissance : </b>{{vipInfos.date_naissance}}</p>
+            <p><b>Date de naissance : </b>{{formatDate vipInfos.date_naissance "dddd D MMMM yyyy"}}</p>
             <p><b>Nationalité : </b>{{vipInfos.Nationalite}}</p>
             {{#if professions}}
                 {{#each professions}}
                     <p><b>Profession : </b>{{this.pro_nom}}</p>
-                    <p><b>Principal(aux) {{this.pro_action}}(s) : </b>{{this.pro_principal}}</p>
+                    <p><b>Principal(aux) {{this.pro_action}}(s) : </b>{{#ifCond this.pro_principal '===' "film"}}
+                        {{#each ../films}}
+                            {{this.FILM_TITRE}} ({{formatDate this.FILMDATEREALISATION "MMMM yyyy"}}) De <a href="{{this.real_num}}">{{this.real_pre}} {{this.real_nom}}</a> <br/>
+                        {{/each}}
+                    {{/ifCond}}
+                    {{#ifCond this.pro_principal '===' "defile"}}
+                        {{#each  ../defile}}
+                            {{this.DEFILE_LIEU}} ({{formatDate this.DEFILE_DATE "MMMM yyyy"}}) de <a href="{{this.cout_num}}">{{this.cout_pre}} {{this.cout_nom}}</a> <br/>
+                        {{/each}}
+                    {{/ifCond}}
+                    </p>
                 {{/each}}
             {{/if}}
             {{#if mariages}}
