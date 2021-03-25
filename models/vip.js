@@ -57,7 +57,65 @@ module.exports.getVipJob = function(callback, vipNum) {
 module.exports.listFilm = function (vipNum, callback) {
     db.getConnection(function (err, connexion) {
         if(!err) {
-            let sql = `SELECT FILM_TITRE, FILM_DATEREALISATION, f.VIP_NUMERO as real_num, f.FILM_NUMERO, t.real_pre, t.real_nom FROM film f JOIN joue j ON f.FILM_NUMERO = j.FILM_NUMERO JOIN vip v ON v.VIP_NUMERO = j.VIP_NUMERO JOIN (SELECT f.FILM_NUMERO,v.VIP_PRENOM AS real_pre, v.VIP_NOM AS real_nom FROM vip v JOIN film f ON f.VIP_NUMERO = v.VIP_NUMERO WHERE f.FILM_NUMERO IN (SELECT f.FILM_NUMERO FROM film f, joue j WHERE f.FILM_NUMERO = j.FILM_NUMERO AND j.VIP_NUMERO = ${vipNum}))t ON t.FILM_NUMERO = f.FILM_NUMERO WHERE v.VIP_NUMERO = ${vipNum} UNION SELECT FILM_TITRE, FILM_DATEREALISATION, f.VIP_NUMERO as real_num,  f.FILM_NUMERO, v.VIP_PRENOM,v.VIP_NOM FROM film f, vip v WHERE v.VIP_NUMERO = f.VIP_NUMERO AND v.VIP_NUMERO = ${vipNum}`
+            let sql = `SELECT
+    FILM_TITRE,
+    FILM_DATEREALISATION,
+    f.VIP_NUMERO AS real_num,
+    f.FILM_NUMERO,
+    t.real_pre,
+    t.real_nom,
+    t.real_photo,
+    t.real_desc
+FROM
+    film f
+JOIN joue j ON
+    f.FILM_NUMERO = j.FILM_NUMERO
+JOIN vip v ON
+    v.VIP_NUMERO = j.VIP_NUMERO
+JOIN(
+    SELECT
+        f.FILM_NUMERO,
+        v.VIP_PRENOM AS real_pre,
+        v.VIP_NOM AS real_nom,
+        p.PHOTO_ADRESSE AS real_photo,
+        CONCAT(SUBSTRING(v.VIP_TEXTE, 1, 75),"...") AS real_desc
+    FROM
+        vip v
+    JOIN film f ON
+        f.VIP_NUMERO = v.VIP_NUMERO
+    JOIN photo p ON
+    p.VIP_NUMERO = v.VIP_NUMERO
+    WHERE
+        f.FILM_NUMERO IN(
+        SELECT
+            f.FILM_NUMERO
+        FROM
+            film f,
+            joue j
+        WHERE
+            f.FILM_NUMERO = j.FILM_NUMERO AND j.VIP_NUMERO = ${vipNum}
+    ) AND p.PHOTO_NUMERO = 1
+) t
+ON
+    t.FILM_NUMERO = f.FILM_NUMERO
+WHERE
+    v.VIP_NUMERO = ${vipNum}
+UNION
+SELECT
+    FILM_TITRE,
+    FILM_DATEREALISATION,
+    f.VIP_NUMERO AS real_num,
+    f.FILM_NUMERO,
+    v.VIP_PRENOM,
+    v.VIP_NOM,
+    p.PHOTO_ADRESSE,
+    CONCAT(SUBSTRING(v.VIP_TEXTE, 1, 75),"...")
+FROM
+    film f,
+    vip v,
+    photo p
+WHERE
+    v.VIP_NUMERO = f.VIP_NUMERO AND v.VIP_NUMERO = ${vipNum} AND p.VIP_NUMERO = v.VIP_NUMERO AND p.PHOTO_NUMERO = 1`
             connexion.query(sql, callback)
             connexion.release()
         }
@@ -67,7 +125,65 @@ module.exports.listFilm = function (vipNum, callback) {
 module.exports.listDefileDans = function (vipNum, callback) {
     db.getConnection(function (err, connexion) {
         if(!err) {
-            let sql = `SELECT DEFILE_LIEU, DEFILE_DATE, d.VIP_NUMERO as cout_num, d.DEFILE_NUMERO, t.cout_pre, t.cout_nom FROM defile d JOIN defiledans dd ON d.DEFILE_NUMERO = dd.DEFILE_NUMERO JOIN vip v ON v.VIP_NUMERO = dd.VIP_NUMERO JOIN (SELECT d.DEFILE_NUMERO,v.VIP_PRENOM AS cout_pre, v.VIP_NOM AS cout_nom FROM vip v JOIN defile d ON d.VIP_NUMERO = v.VIP_NUMERO WHERE d.DEFILE_NUMERO IN (SELECT d.DEFILE_NUMERO FROM defile d, defiledans dd WHERE d.DEFILE_NUMERO = dd.DEFILE_NUMERO AND dd.VIP_NUMERO = ${vipNum}))t ON t.DEFILE_NUMERO = d.DEFILE_NUMERO WHERE v.VIP_NUMERO = ${vipNum} UNION SELECT DEFILE_LIEU, DEFILE_DATE, d.VIP_NUMERO as cout_num, d.DEFILE_NUMERO, v.VIP_PRENOM, v.VIP_NOM FROM defile d, vip v WHERE v.VIP_NUMERO = d.VIP_NUMERO AND v.VIP_NUMERO = ${vipNum}`
+            let sql = `SELECT
+    DEFILE_LIEU,
+    DEFILE_DATE,
+    d.VIP_NUMERO AS cout_num,
+    d.DEFILE_NUMERO,
+    t.cout_pre,
+    t.cout_nom,
+    t.cout_photo,
+    t.cout_desc
+FROM
+    defile d
+JOIN defiledans dd ON
+    d.DEFILE_NUMERO = dd.DEFILE_NUMERO
+JOIN vip v ON
+    v.VIP_NUMERO = dd.VIP_NUMERO
+JOIN(
+    SELECT
+        d.DEFILE_NUMERO,
+        v.VIP_PRENOM AS cout_pre,
+        v.VIP_NOM AS cout_nom,
+        p.PHOTO_ADRESSE AS cout_photo,
+        CONCAT(SUBSTRING(v.VIP_TEXTE, 1, 75),"...") AS cout_desc
+    FROM
+        vip v
+    JOIN defile d ON
+        d.VIP_NUMERO = v.VIP_NUMERO
+    JOIN photo p ON
+    p.VIP_NUMERO = v.VIP_NUMERO
+    WHERE
+        d.DEFILE_NUMERO IN(
+        SELECT
+            d.DEFILE_NUMERO
+        FROM
+            defile d,
+            defiledans dd
+        WHERE
+            d.DEFILE_NUMERO = dd.DEFILE_NUMERO AND dd.VIP_NUMERO = ${vipNum}
+    ) AND p.PHOTO_NUMERO = 1
+) t
+ON
+    t.DEFILE_NUMERO = d.DEFILE_NUMERO
+WHERE
+    v.VIP_NUMERO = ${vipNum}
+UNION
+SELECT
+    DEFILE_LIEU,
+    DEFILE_DATE,
+    d.VIP_NUMERO AS cout_num,
+    d.DEFILE_NUMERO,
+    v.VIP_PRENOM,
+    v.VIP_NOM,
+    p.PHOTO_ADRESSE AS cout_photo,
+    CONCAT(SUBSTRING(v.VIP_TEXTE, 1, 75),"...") AS cout_desc
+FROM
+    defile d,
+    vip v,
+    photo p
+WHERE
+    v.VIP_NUMERO = d.VIP_NUMERO AND v.VIP_NUMERO = ${vipNum} AND p.VIP_NUMERO = v.VIP_NUMERO AND p.PHOTO_NUMERO = 1`
             connexion.query(sql, callback)
             connexion.release()
         }
@@ -87,7 +203,26 @@ module.exports.listChansons = function (vipNum, callback) {
 module.exports.mariages = function (vipNum, callback) {
     db.getConnection(function (err, connexion) {
         if(!err) {
-            let sql = `SELECT v.VIP_NUMERO, v2.VIP_NUMERO AS conj_num, v2.VIP_PRENOM AS conj_pre, v2.VIP_NOM AS conj_nom, m.MARIAGE_LIEU, m.DATE_EVENEMENT, m.MARIAGE_FIN FROM mariage m JOIN vip v ON v.VIP_NUMERO = m.VIP_NUMERO JOIN vip v2 ON v2.VIP_NUMERO = m.VIP_VIP_NUMERO WHERE v.VIP_NUMERO = ${vipNum}`
+            let sql = `SELECT
+    v.VIP_NUMERO,
+    v2.VIP_NUMERO AS conj_num,
+    v2.VIP_PRENOM AS conj_pre,
+    v2.VIP_NOM AS conj_nom,
+    m.MARIAGE_LIEU,
+    m.DATE_EVENEMENT,
+    m.MARIAGE_FIN,
+    p.PHOTO_ADRESSE AS conj_photo,
+    CONCAT(SUBSTRING(v2.VIP_TEXTE, 1, 75),"...") AS conj_desc
+FROM
+    mariage m
+JOIN vip v ON
+    v.VIP_NUMERO = m.VIP_NUMERO
+JOIN vip v2 ON
+    v2.VIP_NUMERO = m.VIP_VIP_NUMERO
+JOIN photo p ON
+p.VIP_NUMERO = v2.VIP_NUMERO
+WHERE
+    v.VIP_NUMERO = ${vipNum} AND p.PHOTO_NUMERO = 1`
             connexion.query(sql, callback)
             connexion.release()
         }
@@ -97,7 +232,25 @@ module.exports.mariages = function (vipNum, callback) {
 module.exports.liaisons = function (vipNum, callback) {
     db.getConnection(function (err, connexion) {
         if(!err) {
-            let sql = `SELECT v.VIP_NUMERO, v2.VIP_NUMERO AS conj_num, v2.VIP_PRENOM AS conj_pre, v2.VIP_NOM AS conj_nom, l.DATE_EVENEMENT, l.LIAISON_MOTIFFIN FROM liaison l JOIN vip v ON v.VIP_NUMERO = l.VIP_NUMERO JOIN vip v2 ON v2.VIP_NUMERO = l.VIP_VIP_NUMERO WHERE v.VIP_NUMERO = ${vipNum}`
+            let sql = `SELECT
+    v.VIP_NUMERO,
+    v2.VIP_NUMERO AS conj_num,
+    v2.VIP_PRENOM AS conj_pre,
+    v2.VIP_NOM AS conj_nom,
+    l.DATE_EVENEMENT,
+    l.LIAISON_MOTIFFIN,
+    p.PHOTO_ADRESSE AS conj_photo,
+    CONCAT(SUBSTRING(v2.VIP_TEXTE, 1, 75),"...") AS conj_desc
+FROM
+    liaison l
+JOIN vip v ON
+    v.VIP_NUMERO = l.VIP_NUMERO
+JOIN vip v2 ON
+    v2.VIP_NUMERO = l.VIP_VIP_NUMERO
+JOIN photo p ON
+    p.VIP_NUMERO = v2.VIP_NUMERO
+WHERE
+    v.VIP_NUMERO = ${vipNum} AND p.PHOTO_NUMERO = 1`
             connexion.query(sql, callback)
             connexion.release()
         }

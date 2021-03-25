@@ -90,3 +90,10 @@ a  {
 .break {
     clear: both;
 }
+
+#vip { position: absolute;
+    border: 1px solid #333;
+    background: #333;
+    padding: 3px;
+    display: none;
+    color: #fff;}
