@@ -46,32 +46,47 @@ module.exports.Show = function (request, response) {
     async.parallel( [
             function (callback) {
                 model.getFirstLetters(function (err, result) {
-                    console.log("res0")
                     callback(null, result);
                 });
             } ,
             function (callback) {
                 model.getVipInfo(function (errE, resE) {
-                    console.log("res1")
                     callback(null,resE);
                 }, num);
             },
             function(callback) {
                 model.getVipJob(function (errA, resA) {
-                    console.log("res2")
                     callback(null, resA)
                 }, num);
             },
             function (callback) {
                 model.listFilm(num, function (errB, resB) {
-                    console.log("res3")
                     callback(null, resB)
                 })
             },
             function (callback) {
                 model.listDefileDans(num, function (errC, resC) {
-                    console.log("Entré das res4")
                     callback(null, resC)
+                })
+            },
+            function (callback) {
+                model.listChansons(num, function (errD, resD) {
+                    callback(null, resD)
+                })
+            },
+            function (callback) {
+                model.mariages(num, function (errF, resF) {
+                    callback(null, resF)
+                })
+            },
+            function (callback) {
+                model.liaisons(num, function (errG, resG) {
+                    callback(null, resG)
+                })
+            },
+            function (callback) {
+                model.images(num, function (errH, resH) {
+                    callback(null, resH)
                 })
             },
         ],
@@ -84,8 +99,11 @@ module.exports.Show = function (request, response) {
             response.vipInfos = result[1][0];
             response.professions = result[2];
             response.films = result[3];
-            response.defile = response[4];
-            console.log(response[4])
+            response.defile = result[4];
+            response.albums = result[5];
+            response.mariages = result[6];
+            response.liaisons = result[7];
+            response.images = result[8];
             response.render('repertoireVips', response);
         })
 }

@@ -84,4 +84,9 @@ a  {
 .float {
     display: inline-block;
     float: left;
+    width: 65%;
+    text-align: left;
+}
+.break {
+    clear: both;
 }
