@@ -96,4 +96,51 @@ a  {
     background: #333;
     padding: 3px;
     display: none;
-    color: #fff;}
+    color: #fff;
+}
+
+.tableNomVip {
+    float: right;
+    border: 1px black solid;
+    border-radius: 10px;
+    width:  inherit;
+    text-decoration: underline;
+}
+.tableNomVip a{
+    color: black;
+    font-weight: bold;
+}
+.imgArtVip img{
+    background-color: black;
+    border-radius: 10px;
+    border-top: 0px;
+    width: 100%;
+
+}
+.contenuArticle{
+    text-align:  left;
+    width: inherit;
+
+}
+
+.nomVipArticle{
+    text-align: left;
+    text-decoration: underline;
+    font-weight:  bold;
+
+}
+.contenuArticle{
+    float: left;
+    width: 85%;
+}
+.gris{
+    background-color: #d3d8df;
+}
+.gris p{
+    float: left;
+}
+.gris a {
+    color: black;
+    float: right;
+    text-decoration: underline;
+}
