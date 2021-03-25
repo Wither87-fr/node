@@ -1,4 +1,4 @@
-let model = require("../models/vip.js");
+let model = require("../models/album.js");
 let async = require('async');
 // ////////////////////// L I S T E R     A L B U M S
 
