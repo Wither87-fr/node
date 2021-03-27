@@ -13,7 +13,7 @@ module.exports.ListerAlbum = 	function(request, response){
                });
            },
            function (callback) {
-               model.commentPhoto(function (err, result) {
+               model.commentPhoto(vipNum, function (err, result) {
                    callback(null,result);
                }, vipNum);
            },
