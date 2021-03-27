@@ -1,9 +1,7 @@
 {{#each listerAlbum}}
-    {{#isNth @index 12}}
-        <div class="next">
-    {{/isNth}}
-  <a href="/album/{{this.VIP_NUMERO}}"> <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="{{this.VIP_PRENOM}} {{this.VIP_NOM}}" width="15%"></a>
-    {{#isNth @index 12}}
-        </div>
-    {{/isNth}}
+  <a href="/album/{{this.VIP_NUMERO}}" data-groupe="{{this.groupe}}" class="album"> <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="{{this.VIP_PRENOM}} {{this.VIP_NOM}}" width="15%"></a>
 {{/each}}
+<button class="navigate" type="button" data-current="1" data-action="first">Retourner au début</button>
+<button class="navigate" type="button" data-current="1" data-action="prev">Précédent</button>
+<button class="navigate" type="button" data-current="1" data-action="next">Suivant</button>
+<button class="navigate" type="button" data-current="1" data-action="last">Aller à la fin</button>

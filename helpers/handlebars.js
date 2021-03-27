@@ -91,15 +91,6 @@ function hbsHelpers(handlebars) {
                     default:
                         return options.inverse(this);
                 }
-            },
-            
-            
-            isNth : function (item, nth, options) {
-
-                if (item % nth === 0 && item !== 0)
-                    return options.fn(this);
-                else
-                    return options.inverse(this);
             }
         }
     });

@@ -147,3 +147,9 @@ a  {
 .next {
     border: solid black 2px;
 }
+.first {
+    background-color: red;
+}
+.other {
+    background-color: green;
+}
