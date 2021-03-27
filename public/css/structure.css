@@ -144,3 +144,6 @@ a  {
     float: right;
     text-decoration: underline;
 }
+.next {
+    border: solid black 2px;
+}

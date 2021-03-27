@@ -24,6 +24,7 @@ module.exports.ListerAlbum = 	function(request, response){
                return;
            }
            response.listerAlbum = result[0];
+           console.log(result[0]);
            response.commentPhoto = result[1];
    response.render('listerAlbum', response);
  })

@@ -1,3 +1,9 @@
 {{#each listerAlbum}}
-  <a href="/album/{{this.VIP_NUMERO}}"> <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="photoAlb" width="15%"></a>
+    {{#isNth @index 12}}
+        <div class="next">
+    {{/isNth}}
+  <a href="/album/{{this.VIP_NUMERO}}"> <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="{{this.VIP_PRENOM}} {{this.VIP_NOM}}" width="15%"></a>
+    {{#isNth @index 12}}
+        </div>
+    {{/isNth}}
 {{/each}}
