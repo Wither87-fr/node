@@ -33,9 +33,69 @@
                 });
             };
 
+
             $(document).ready(function(){
-                console.log($("a.vip"))
                 preview_vip();
+                $("a.album[data-groupe!='1']").hide();
+                $("button.navigate[data-action='first']").hide()
+                $("button.navigate[data-action='prev']").hide()
+                $('button.navigate').on('click', change);
+
+                function change() {
+                    console.log(this)
+                    let change_type = $(this).attr('data-action');
+                    let current = $(this).attr('data-current');
+
+                    if(change_type == "first") {
+                        $("button.navigate").attr('data-current','1');
+                        $("a.album[data-groupe!='1']").hide();
+                        $("a.album[data-groupe='1']").show();
+                        $("button.navigate[data-action='first']").hide()
+                        $("button.navigate[data-action='prev']").hide()
+                        $("button.navigate[data-action='last']").show()
+                        $("button.navigate[data-action='next']").show()
+                    }
+
+                    if(change_type == "next") {
+                        let next = parseInt(current) + 1
+                        $("button.navigate").attr('data-current',next);
+                        $("a.album[data-groupe!='"+next+"']").hide();
+                        $("a.album[data-groupe='"+next+"']").show();
+                        if(parseInt(current) === 1) {
+                            $("button.navigate[data-action='first']").show()
+                            $("button.navigate[data-action='prev']").show()
+                        }
+                        if(next === 4) {
+                            $("button.navigate[data-action='last']").hide()
+                            $("button.navigate[data-action='next']").hide()
+                        }
+                    }
+
+                    if(change_type == "prev") {
+                        let previous = parseInt(current) - 1
+                        $("button.navigate").attr('data-current',previous);
+                        $("a.album[data-groupe!='"+previous+"']").hide();
+                        $("a.album[data-groupe='"+previous+"']").show();
+                        if(parseInt(current) === 4) {
+                            $("button.navigate[data-action='last']").show()
+                            $("button.navigate[data-action='next']").show()
+                        }
+                        if(previous === 1) {
+                            $("button.navigate[data-action='first']").hide()
+                            $("button.navigate[data-action='prev']").hide()
+                        }
+                    }
+
+                    if(change_type == "last") {
+                        $("button.navigate").attr('data-current','4');
+                        $("a.album[data-groupe!='4']").hide();
+                        $("a.album[data-groupe='4']").show();
+                        $("button.navigate[data-action='first']").show()
+                        $("button.navigate[data-action='prev']").show()
+                        $("button.navigate[data-action='last']").hide()
+                        $("button.navigate[data-action='next']").hide()
+                    }
+                }
             });
         </script>
         <title> {{title}}</title>
