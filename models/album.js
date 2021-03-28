@@ -11,10 +11,10 @@ module.exports.listerAlbum = function(callback) {
     });
 };
 
-module.exports.commentPhoto = function(vipNum, callback) {
+module.exports.commentPhoto = function(numStar, callback) {
     db.getConnection(function(err, connexion) {
         if (!err) {
-            let sql =   `SELECT  v.VIP_NUMERO, VIP_NOM, VIP_PRENOM, PHOTO_ADRESSE, PHOTO_COMMENTAIRE FROM vip v JOIN photo p ON v.VIP_NUMERO = p.VIP_NUMERO WHERE v.VIP_NUMERO = ${vipNum}`;
+            let sql =   `SELECT  v.VIP_NUMERO, VIP_NOM, VIP_PRENOM, PHOTO_ADRESSE, PHOTO_COMMENTAIRE FROM vip v JOIN photo p ON v.VIP_NUMERO = p.VIP_NUMERO WHERE v.VIP_NUMERO = ${numStar}`;
             connexion.query(sql, callback);
             connexion.release();
         }
