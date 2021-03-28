@@ -1,4 +1,4 @@
-let db = require('../configDb');
+let db = require('../../configDb');
 
 
 module.exports.listerAlbum = function(callback) {
