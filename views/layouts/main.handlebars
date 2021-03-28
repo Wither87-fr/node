@@ -36,11 +36,7 @@
 
             $(document).ready(function(){
 
-                $("a.album[href]").each(function() {
-                    if (this.href != window.location.href) {
-                        $(this).addClass("grayed");
-                    }
-                });
+
 
                 preview_vip();
                 $("a.album[data-groupe!='1']").hide();
@@ -55,6 +51,28 @@
                 $('div.oneVIP[data-num!="0"]').hide();
 
                 $('button.switchPhoto').on('click', switchPhoto);
+
+                $("a.album[href]").each(function() {
+                    if (this.href != window.location.href) {
+                        $(this).addClass("grayed");
+                    } else {
+                        $("a.album[data-groupe!='"+$(this).attr('data-groupe')+"']").hide();
+                        $("a.album[data-groupe='"+$(this).attr('data-groupe')+"']").show();
+                        $('button.navigate').attr('data-current', parseInt($(this).attr('data-groupe')))
+                        if(parseInt($(this).attr('data-groupe')) != 1 && parseInt($(this).attr('data-groupe')) != 4) {
+                            console.log(parseInt($(this).attr('data-groupe')))
+                            console.log("different de un ou 4")
+                            $('button.navigate').show();
+                        } else {
+                            if(parseInt($(this).attr('data-groupe')) == 4) {
+                                $("button.navigate[data-action='first']").show()
+                                $("button.navigate[data-action='prev']").show()
+                                $("button.navigate[data-action='last']").hide()
+                                $("button.navigate[data-action='next']").hide()
+                            }
+                        }
+                    }
+                });
 
                 function switchPhoto() {
                     let total = $(this).parent('div').attr('data-nb');
