@@ -1,17 +1,25 @@
 <h1> Mettre ici l'album photo des stars </h1>
 <div class = "tab">
-  <div class="tabAlb">
 {{>ListPhotoAlb}}
-</div>
     {{#if commentPhoto}}
         <div class="album" data-nb="{{counter.nb_photo}}">
-        <button class="switchPhoto" type="button" data-current="0" data-action="prev">&lt&lt</button>
+        <div class="prev">
+        <button class="switchPhoto left" type="button" data-current="0" data-action="prev">&lt&lt</button>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </div>
             <div class="photos">
         {{#each commentPhoto}}
             <div class="oneVIP" data-num="{{@index}}">
 
                 <p class="nomVipAlbum np">{{this.VIP_PRENOM}} {{this.VIP_NOM}}</p>
-                <img src="/images/vip/{{this.PHOTO_ADRESSE}}"  data-groupe="{{this.groupe}}" alt="adr" id="imgAlbum">
+                <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="adr" id="imgAlbum" width="50%">
                 <fieldset>
                     <legend>Commentaire</legend>
                     <p>
@@ -25,9 +33,19 @@
             </div>
 
         {{/each}}
-        <button class="switchPhoto" type="button" data-current="0" data-action="next">&gt&gt</button>
-        
-    </div>
+            </div>
+        <div class="nextBtn">
+        <button class="switchPhoto right" type="button" data-current="0" data-action="next">&gt&gt</button>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+
     </div>
     {{else}}
         <p>

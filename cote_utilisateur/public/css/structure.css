@@ -148,32 +148,38 @@ a  {
     border: solid black 2px;
 }
 .menu {
+    float : right;
+    width: 30%;
+    height: auto;
     border: solid red 2px;
 }
+.menu img {
+    width:20%;
+    height: auto;
+}
 .album {
+    width: 69%;
+    height: 40%;
+    float: left;
+    text-align: center;
     border: solid green 2px;
 }
 .photos {
+    display: inline-block;
+    width: 90%;
     border: solid blue 2px;
 }
 .oneVIP {
     border: solid yellow 2px;
 }
-.tabAlb{
-  float : right;
-  width: 30%;
-  height: auto;
-}
-.tabAlb img {
-  width:20%;
-  height: auto;
-}
 .photo, .switchPhoto {
   display: inline-block;
  }
- .switchPhoto{
-   display: inline-block;
- }
+.prev, .nextBtn {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 .grayed {
     filter: grayscale(100%);
     -webkit-filter: grayscale(100%);
@@ -183,4 +189,15 @@ a  {
     filter: grayscale(0%);
     -webkit-filter: grayscale(0%);
     -moz-filter: grayscale(0%);
+}
+
+.prev {
+    width: 4%;
+    display: inline-block;
+    text-align: center;
+}
+.nextBtn {
+    width: 4%;
+    display: inline-block;
+    text-align: center;
 }

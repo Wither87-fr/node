@@ -39,7 +39,7 @@
 
 
                 preview_vip();
-                $("a.album[data-groupe!='1']").hide();
+                $("a.ab[data-groupe!='1']").hide();
                 $("button.navigate[data-action='first']").hide()
                 $("button.navigate[data-action='prev']").hide()
                 $('button.navigate').on('click', change);
@@ -52,12 +52,12 @@
 
                 $('button.switchPhoto').on('click', switchPhoto);
 
-                $("a.album[href]").each(function() {
+                $("a.ab[href]").each(function() {
                     if (this.href != window.location.href) {
                         $(this).addClass("grayed");
                     } else {
-                        $("a.album[data-groupe!='"+$(this).attr('data-groupe')+"']").hide();
-                        $("a.album[data-groupe='"+$(this).attr('data-groupe')+"']").show();
+                        $("a.ab[data-groupe!='"+$(this).attr('data-groupe')+"']").hide();
+                        $("a.ab[data-groupe='"+$(this).attr('data-groupe')+"']").show();
                         $('button.navigate').attr('data-current', parseInt($(this).attr('data-groupe')))
                         if(parseInt($(this).attr('data-groupe')) != 1 && parseInt($(this).attr('data-groupe')) != 4) {
                             console.log(parseInt($(this).attr('data-groupe')))
@@ -75,10 +75,10 @@
                 });
 
                 function switchPhoto() {
-                    let total = $(this).parent('div').attr('data-nb');
+                    let total = $(this).parent('div').parent('div').attr('data-nb');
                     let change_type = $(this).attr('data-action');
                     let current = $(this).attr('data-current');
-
+                    console.log(total)
                     if(change_type == "next") {
                         let next = parseInt(current) + 1
                         if(parseInt(current) === 0) {
@@ -114,8 +114,8 @@
 
                     if(change_type == "first") {
                         $("button.navigate").attr('data-current','1');
-                        $("a.album[data-groupe!='1']").hide();
-                        $("a.album[data-groupe='1']").show();
+                        $("a.ab[data-groupe!='1']").hide();
+                        $("a.ab[data-groupe='1']").show();
                         $("button.navigate[data-action='first']").hide()
                         $("button.navigate[data-action='prev']").hide()
                         $("button.navigate[data-action='last']").show()
@@ -125,8 +125,8 @@
                     if(change_type == "next") {
                         let next = parseInt(current) + 1
                         $("button.navigate").attr('data-current',next);
-                        $("a.album[data-groupe!='"+next+"']").hide();
-                        $("a.album[data-groupe='"+next+"']").show();
+                        $("a.ab[data-groupe!='"+next+"']").hide();
+                        $("a.ab[data-groupe='"+next+"']").show();
                         if(parseInt(current) === 1) {
                             $("button.navigate[data-action='first']").show()
                             $("button.navigate[data-action='prev']").show()
@@ -140,8 +140,8 @@
                     if(change_type == "prev") {
                         let previous = parseInt(current) - 1
                         $("button.navigate").attr('data-current',previous);
-                        $("a.album[data-groupe!='"+previous+"']").hide();
-                        $("a.album[data-groupe='"+previous+"']").show();
+                        $("a.ab[data-groupe!='"+previous+"']").hide();
+                        $("a.ab[data-groupe='"+previous+"']").show();
                         if(parseInt(current) === 4) {
                             $("button.navigate[data-action='last']").show()
                             $("button.navigate[data-action='next']").show()
@@ -154,8 +154,8 @@
 
                     if(change_type == "last") {
                         $("button.navigate").attr('data-current','4');
-                        $("a.album[data-groupe!='4']").hide();
-                        $("a.album[data-groupe='4']").show();
+                        $("a.ab[data-groupe!='4']").hide();
+                        $("a.ab[data-groupe='4']").show();
                         $("button.navigate[data-action='first']").show()
                         $("button.navigate[data-action='prev']").show()
                         $("button.navigate[data-action='last']").hide()

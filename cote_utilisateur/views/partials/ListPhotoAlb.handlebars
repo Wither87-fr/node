@@ -1,11 +1,15 @@
 <div class="menu">
     <div class="next">
     {{#each listerAlbum}}
-      <a href="/album/{{this.VIP_NUMERO}}" data-groupe="{{this.groupe}}" class="album"> <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="{{this.VIP_PRENOM}} {{this.VIP_NOM}}" width="15%"></a>
+      <a href="/album/{{this.VIP_NUMERO}}" data-groupe="{{this.groupe}}" class="ab"> <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="{{this.VIP_PRENOM}} {{this.VIP_NOM}}" width="15%"></a>
     {{/each}}
     </div>
-    <button class="navigate" type="button" data-current="1" data-action="first">Retourner au début</button>
+    <div class="left">
+    <button class="navigate" type="button" data-current="1" data-action="first">début</button>
     <button class="navigate" type="button" data-current="1" data-action="prev">Précédent</button>
+    </div>
+    <div class="right">
     <button class="navigate" type="button" data-current="1" data-action="next">Suivant</button>
-    <button class="navigate" type="button" data-current="1" data-action="last">Aller à la fin</button>
+    <button class="navigate" type="button" data-current="1" data-action="last">fin</button>
+    </div>
 </div>
