@@ -150,3 +150,12 @@ a  {
 .menu {
     border: solid red 2px;
 }
+.album {
+    border: solid green 2px;
+}
+.photos {
+    border: solid blue 2px;
+}
+.oneVIP {
+    border: solid yellow 2px;
+}
