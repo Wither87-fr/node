@@ -2,9 +2,10 @@
 {{>ListPhotoAlb}}
     {{#if commentPhoto}}
         {{#each commentPhoto}}
-
+    <button class="navigate" type="button" data-current="1" data-action="next">Suivant</button>
                 <p class="nomVipAlbum np">{{this.VIP_PRENOM}} {{this.VIP_NOM}}</p>
-                <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="adr" id="imgAlbum">
+                <img src="/images/vip/{{this.PHOTO_ADRESSE}}"  data-groupe="{{this.groupe}}" alt="adr" id="imgAlbum">
+                    <button class="navigate" type="button" data-current="1" data-action="prev">Précédent</button>
                 <fieldset>
                     <legend>Commentaire</legend>
                     <p>
@@ -22,5 +23,3 @@
             Choisissez un vip pour voir l'album le concernant
         </p>
     {{/if}}
-    <button class="navigate" type="button" data-current="1" data-action="prev">Précédent</button>
-    <button class="navigate" type="button" data-current="1" data-action="next">Suivant</button>
