@@ -169,7 +169,12 @@ a  {
   height: 20%;
 }
 
-.switchPhoto,{
+.switchPhoto{
   float : left;
   
+}
+.grayed {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
 }
