@@ -18,7 +18,7 @@ module.exports = function(app){
     app.get('/repertoire/:letter/:num', VipController.Show);
 // albums
     app.get('/album', AlbumController.ListerAlbum);
-  app.get('/album/:numStar', AlbumController.MontrerAlbum);
+    app.get('/album/:numStar', AlbumController.MontrerAlbum);
 //article
     app.get('/articles', ArticleController.articlesAll);
     app.get('/articles/:num', ArticleController.articlesVip);

@@ -1,13 +1,24 @@
 <h1> Mettre ici l'album photo des stars </h1>
-{{>ListPhotoAlb}}
-{{#each commentPhoto}}
-{{#if commentPhoto}}
-<p> {{this.VIP_NOM}} {{this.VIP_PRENOM}}</p>
-<img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="imageAlb">
-<Legend>Commentaires</legend>
-  <p> {{#if this.PHOTO_COMMENTAIRE}}
-      {{this.PHOTO_COMMENTAIRE}}
-      {{/if}}
-    </p>
-{{/if}}
-{{/each}}
+
+    {{#if commentPhoto}}
+        {{#each commentPhoto}}
+            <div class="commentAlb">
+                <p class="nomVipAlbum np">{{this.VIP_PRENOM}} {{this.VIP_NOM}}</p>
+                <img src="/images/vip/{{this.PHOTO_ADRESSE}}" alt="adr" id="imgAlbum">
+                <fieldset>
+                    <legend>Commentaire</legend>
+                    <p>
+                        {{#if this.PHOTO_COMMENTAIRE}}
+                            {{this.PHOTO_COMMENTAIRE}}
+                        {{else}}
+                            <i>Cette photo ne possède pas de commentaire</i>
+                        {{/if}}
+                    </p>
+                </fieldset>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>
+            Choisissez un vip pour voir l'album le concernant
+        </p>
+    {{/if}}
