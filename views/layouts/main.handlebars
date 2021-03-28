@@ -35,6 +35,13 @@
 
 
             $(document).ready(function(){
+
+                $("a.album[href]").each(function() {
+                    if (this.href != window.location.href) {
+                        $(this).addClass("grayed");
+                    }
+                });
+
                 preview_vip();
                 $("a.album[data-groupe!='1']").hide();
                 $("button.navigate[data-action='first']").hide()
