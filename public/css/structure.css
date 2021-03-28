@@ -159,3 +159,17 @@ a  {
 .oneVIP {
     border: solid yellow 2px;
 }
+.tabAlb{
+  float : right;
+  width: 30%;
+  height: 30%;
+}
+.tabAlb img {
+  width:20%;
+  height: 20%;
+}
+
+.switchPhoto,{
+  float : left;
+  
+}
