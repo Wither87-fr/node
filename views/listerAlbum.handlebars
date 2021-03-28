@@ -2,14 +2,13 @@
 {{>ListPhotoAlb}}
 
     {{#if commentPhoto}}
-        <div class="album" data-num="X">
+        <div class="album" data-nb="{{counter.nb_photo}}">
         <button class="switchPhoto" type="button" data-current="0" data-action="prev">&lt&lt</button>
             <div class="photos">
         {{#each commentPhoto}}
             <div class="oneVIP" data-num="{{@index}}">
                 <p class="nomVipAlbum np">{{this.VIP_PRENOM}} {{this.VIP_NOM}}</p>
                 <img src="/images/vip/{{this.PHOTO_ADRESSE}}"  data-groupe="{{this.groupe}}" alt="adr" id="imgAlbum">
-                    <button class="navigate" type="button" data-current="1" data-action="prev">Précédent</button>
                 <fieldset>
                     <legend>Commentaire</legend>
                     <p>

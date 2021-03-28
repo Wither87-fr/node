@@ -20,3 +20,13 @@ module.exports.commentPhoto = function(numStar, callback) {
         }
     });
 };
+
+module.exports.counter = function (numStar, callback) {
+    db.getConnection(function (err, connexion) {
+        if(!err) {
+            let sql = `SELECT COUNT(p.PHOTO_NUMERO) AS nb_photo FROM photo p WHERE p.VIP_NUMERO = ${numStar}`;
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    })
+}

@@ -40,9 +40,50 @@
                 $("button.navigate[data-action='first']").hide()
                 $("button.navigate[data-action='prev']").hide()
                 $('button.navigate').on('click', change);
+                if (parseInt($('div.album').attr('data-nb')) === 1) {
+                    $('button.switchPhoto').hide();
+                } else {
+                    $('button.switchPhoto[data-action="prev"]').hide();
+                }
+                $('div.oneVIP[data-num!="0"]').hide();
+
+                $('button.switchPhoto').on('click', switchPhoto);
+
+                function switchPhoto() {
+                    let total = $(this).parent('div').attr('data-nb');
+                    let change_type = $(this).attr('data-action');
+                    let current = $(this).attr('data-current');
+
+                    if(change_type == "next") {
+                        let next = parseInt(current) + 1
+                        if(parseInt(current) === 0) {
+                            $('button.switchPhoto[data-action="prev"]').show();
+                        }
+                        if(next === parseInt(total) - 1) {
+                            $('button.switchPhoto[data-action="next"]').hide();
+                        }
+
+                        $('div.oneVIP[data-num!="'+next+'"]').hide();
+                        $('div.oneVIP[data-num="'+next+'"]').show();
+                        $('button.switchPhoto').attr('data-current', next);
+                    }
+
+                    if(change_type == "prev") {
+                        let prev = parseInt(current) - 1
+                        if(parseInt(current) === parseInt(total) - 1) {
+                            $('button.switchPhoto[data-action="next"]').show();
+                        }
+                        if(prev === 0) {
+                            $('button.switchPhoto[data-action="prev"]').hide();
+                        }
+
+                        $('div.oneVIP[data-num!="'+prev+'"]').hide();
+                        $('div.oneVIP[data-num="'+prev+'"]').show();
+                        $('button.switchPhoto').attr('data-current', prev);
+                    }
+                }
 
                 function change() {
-                    console.log(this)
                     let change_type = $(this).attr('data-action');
                     let current = $(this).attr('data-current');
 

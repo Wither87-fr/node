@@ -25,9 +25,14 @@ module.exports.MontrerAlbum =     function(request, response){
                 });
             },
             function (callback) {
-                model.commentPhoto(numStar, function (err, result) {
-                    callback(null,result);
+                model.commentPhoto(numStar, function (errA, resultA) {
+                    callback(null,resultA);
                 });
+            },
+            function (callback) {
+               model.counter(numStar, function (errB, resultB) {
+                   callback(null, resultB);
+               })
             },
         ],
         function (err, result) {
@@ -37,6 +42,8 @@ module.exports.MontrerAlbum =     function(request, response){
             }
             response.listerAlbum = result[0];
             response.commentPhoto = result[1];
+            response.counter = result[2][0];
+            console.log(result[2][0])
             response.render('listerAlbum', response);
         })
 }
