@@ -1,4 +1,4 @@
-let db = require('../configDb');
+let db = require('../../configDb');
 
 module.exports.login = function(callback) {
   db.getConnection(function(err, connexion) {
