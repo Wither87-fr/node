@@ -144,14 +144,10 @@ a  {
     float: right;
     text-decoration: underline;
 }
-.next {
-    border: solid black 2px;
-}
 .menu {
     float : right;
     width: 30%;
     height: auto;
-    border: solid red 2px;
 }
 .menu img {
     width:20%;
@@ -162,15 +158,10 @@ a  {
     height: 40%;
     float: left;
     text-align: center;
-    border: solid green 2px;
 }
 .photos {
     display: inline-block;
     width: 90%;
-    border: solid blue 2px;
-}
-.oneVIP {
-    border: solid yellow 2px;
 }
 .photo, .switchPhoto {
   display: inline-block;
