@@ -31,9 +31,3 @@ module.exports.connexion = function(request, response){
     }
   });
 };
-
-module.exports.Deconnexion = function(request, response){
-  response.title = "Administration";
-  request.session.login = null;
-  response.render('connexion', response);
-};
