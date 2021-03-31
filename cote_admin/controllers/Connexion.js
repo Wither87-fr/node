@@ -12,12 +12,11 @@ module.exports.connexion = function(request, response){
 
     let id = request.body.login;
     let mdp = request.body.pwd
-
     let login = result[0]['LOGIN'];
     let passwd = result[0]['PASSWD'];
 
-    let decryptedString = cryptr.decrypt(passwd);
-
+    const decryptedString = cryptr.decrypt(passwd);
+    //console.log(decryptedString);
     if (id === login) {
       if (mdp === decryptedString) {
         request.session.login = login;
@@ -30,7 +29,6 @@ module.exports.connexion = function(request, response){
     else {
       response.render('connexion', response);
     }
-
   });
 };
 

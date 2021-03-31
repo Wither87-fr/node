@@ -20,10 +20,10 @@ module.exports = function(app){
     app.get('/album/:numStar', AlbumController.MontrerAlbum);
 //article
     app.get('/articles', ArticleController.articlesAll);
-    app.get('/articles/:num', ArticleController.articlesVip);
+    app.get('/articles/:num', ArticleController.articlesVip); */
 
 // tout le reste
     app.get('*', HomeController.NotFound);
-    app.post('*', HomeController.NotFound);*/
+    app.post('*', HomeController.NotFound);
 
 };
